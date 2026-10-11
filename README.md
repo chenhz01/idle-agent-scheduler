@@ -2,6 +2,8 @@
 
 **Most agent sandboxes sit idle 95% of the time while paying resident memory the whole time.** This ~200-line scheduler freezes silent agents to disk and thaws them sub-second on request. You need it if you run more concurrent agents than your RAM can hold.
 
+<p align="center"><img src="docs/demo.gif" alt="demo" width="720"></p>
+
 ## Problem
 
 Agent runtimes at fleet scale (the approach of [agent-substrate/substrate](https://github.com/agent-substrate/substrate), which runs millions of sandboxed agents on K8s) discovered something single-machine setups ignore: an agent's *idle state is a schedulable resource*, not a permanent reservation. Keep every agent resident and your concurrency is capped by RAM; treat silence as freeze-and-evict, and density jumps by an order of magnitude — provided recovery is fast enough that requesters never notice.
